@@ -22,12 +22,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "JIRA_TASK")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=Integer.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=Long.class)
 public class JiraTask implements Serializable {
 	
 	private static final long serialVersionUID = -18493783635667L;
 
-	int id;
+	long id;
 	Employee employee;
 	String name;
 	String description;
@@ -38,10 +38,10 @@ public class JiraTask implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -82,6 +82,7 @@ public class JiraTask implements Serializable {
 		this.createdDate = createdDate;
 	}
 	
+	
 	//@Temporal(value = TemporalType.TIMESTAMP)
 	@UpdateTimestamp
 	@Column(name="updated_date")
@@ -91,11 +92,6 @@ public class JiraTask implements Serializable {
 	}
 	public void setUpdatedDate(Date updatedDate) {
 		this.updatedDate = updatedDate;
-	}
-	@Override
-	public String toString() {
-		return "JiraTask [id=" + id + ", name=" + name + ", description=" + description + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + "]";
 	}
 	
 	

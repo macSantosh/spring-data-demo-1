@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -20,7 +21,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name = "Employee")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=Integer.class)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope=Long.class)
 public class Employee implements Serializable{
     /**
 	 * 
@@ -41,9 +42,9 @@ public class Employee implements Serializable{
 	@Column(name = "salary")
 	private double salary;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	//@JsonManagedReference
-	@OneToMany(mappedBy="employee", fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="employee", fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     private Set<JiraTask> jiraTasks = new HashSet<>();
     
     public long getId() {
